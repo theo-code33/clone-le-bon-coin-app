@@ -14,23 +14,14 @@ function Dropzone({setCredentials}) {
     useDropzone({
       accept: "image/*",
       onDrop: (acceptedFiles) => {
-        const newImageURLs = [...imageURLs];
-        acceptedFiles.map((file, index) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => {
-            newImageURLs[index] = reader.result;
-            setImageURLs(newImageURLs);
-          };
+        setFiles((prevFile) => {
+            return [
+                ...prevFile,
+                ...acceptedFiles
+            ]
         });
-        setFiles([...files, ...acceptedFiles]);
       },
     });
-  const filesInput = files.map((file) => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
   const deleteImage = (index, e) => {
     e.stopPropagation();
     setFiles(files.filter((file, i) => i !== index));
@@ -42,7 +33,16 @@ function Dropzone({setCredentials}) {
     })
   }, [acceptedFiles]);
   useEffect(() => {
-    console.log(files);
+    const newImageURLs = [...imageURLs];
+    files.map((file, index) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          newImageURLs[index] = reader.result;
+          setImageURLs(newImageURLs);
+        };
+      });
+    console.log("files => ", files);
   }, [files]);
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -65,7 +65,7 @@ function Dropzone({setCredentials}) {
             <span>Ajouter des photos</span>
           </Paper>
         </Grid>
-        {[...Array(7)].map((_, index) => (
+        {[...Array(7)].map((item, index) => (
           <Grid item xs={3}>
             <Paper
               className={`dropzone-paper${isDragActive ? " active" : ""}`}
@@ -94,7 +94,6 @@ function Dropzone({setCredentials}) {
           </Grid>
         ))}
       </Grid>
-      <ul>{filesInput}</ul>
     </Box>
   );
 }

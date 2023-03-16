@@ -48,7 +48,7 @@ const ModalPhoto = ({files}) => {
     return ( 
         <>
             {
-                files.length > 3 && 
+                files.length > 1 && 
                 <>
                     <Button variant="contained" onClick={handleOpen}>Voir les {files.length - 3} autres images</Button>
                     <Modal
@@ -61,11 +61,9 @@ const ModalPhoto = ({files}) => {
                             <Button variant='contained' onClick={handleClose} sx={styleButton}>X</Button>
                             <swiper-container navigation="true" pagination="true" className="swiper swiper-image" style={{height: "100%"}}>
                                 {files.map((file, index) => {
-                                    if(index > 3){
-                                        return <swiper-slide>
-                                            <img src={file.Location} style={styleImg}/>
-                                        </swiper-slide>
-                                    }
+                                    return <swiper-slide>
+                                        <img src={file.Location} style={styleImg}/>
+                                    </swiper-slide>
                                 })}
                             </swiper-container>
                         </Box>

@@ -16,7 +16,6 @@ const AutoCompleteInput = ({setCredentials}) => {
         window.google.maps.event.addListener(autocomplete, 'place_changed', function() {
 
             const autocompleteValue = autocomplete.getPlace()
-            console.log(autocompleteValue);
 
             const location = {}
 
@@ -53,7 +52,7 @@ const AutoCompleteInput = ({setCredentials}) => {
         <TextField
         variant="outlined"
         className="location"
-        label="location"
+        label="Localisation"
         name="location"
         inputRef={inputLocation}
         />
