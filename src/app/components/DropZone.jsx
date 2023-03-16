@@ -85,7 +85,7 @@ function Dropzone({setCredentials}) {
               {imageURLs[index] && (
                 <Box sx={{ position: "relative", top: 0, right: 0 }}>
                   <IconButton onClick={(e) => deleteImage(index, e)}>
-                    <DeleteIcon />
+                    <DeleteIcon color="error"/>
                   </IconButton>
                 </Box>
               )}
