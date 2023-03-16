@@ -42,9 +42,9 @@ const PostPageForm = () => {
           navigate("/");
         }}
       >
-        Go back
+        Retour
       </Button>
-      <Typography variant="h2">Create a new post</Typography>
+      <Typography variant="h2" sx={{mb: 5}}>Créer une nouvelle annonce</Typography>
       <PostForm />
     </Box>
   );
