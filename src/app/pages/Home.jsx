@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import PostList from "../components/PostList";
+import PostList from "../components/postsListing/PostList";
 import SearchForm from "../components/SearchForm";
 
 const PostPage = () => {

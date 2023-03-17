@@ -1,10 +1,10 @@
 import { Box, Button, Step, StepLabel, Stepper, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { PostContext } from "../../src/context/Post.context";
-import PostService from "../../src/services/post.service";
-import AutoCompleteInput from "./AutoCompleteInput";
-import Dropzone from "./DropZone";
+import { PostContext } from "../../../src/context/Post.context";
+import PostService from "../../../src/services/post.service";
+import AutoCompleteInput from "../localization/AutoCompleteInput";
+import Dropzone from "../dropzone/DropZone";
 
 
 const PostForm = () => {

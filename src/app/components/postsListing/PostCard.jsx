@@ -5,10 +5,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
-import PostService from '../../src/services/post.service';
+import PostService from '../../../src/services/post.service';
 import { set } from 'mongoose';
 import { useContext } from 'react';
-import { PostContext } from '../../src/context/Post.context';
+import { PostContext } from '../../../src/context/Post.context';
 
 const PostCard = ({ post }) => {
     const navigate = useNavigate();

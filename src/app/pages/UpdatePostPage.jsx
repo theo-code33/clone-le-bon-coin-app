@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import UpdatePostForm from "../components/UpdatePostForm";
+import UpdatePostForm from "../components/postsForm/UpdatePostForm";
 
 const UpdatePostPage = () => {
     const [post, setPost] = useState(null);

@@ -2,12 +2,12 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PostService from "../../src/services/post.service";
-import ModalPhoto from "../components/ModalPhoto";
+import ModalPhoto from "../components/modal/ModalPhoto";
 
 const PostPage = () => {
     const { id } = useParams();
     const [post, setPost] = useState(null);
-    
+
     useEffect(() => {
         PostService.getById(id, setPost);
     }, [])

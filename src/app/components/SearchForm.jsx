@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import { useContext, useState } from "react";
 import { PostContext } from "../../src/context/Post.context";
 import PostService from "../../src/services/post.service";
-import AutoCompleteInput from "./AutoCompleteInput";
+import AutoCompleteInput from "./localization/AutoCompleteInput";
 
 const SearchForm = () => {
     const [credentials, setCredentials] = useState({

@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import PostForm from "../components/PostForm";
+import PostForm from "../components/postsForm/PostForm";
 
 const PostPageForm = () => {
   const navigate = useNavigate();
