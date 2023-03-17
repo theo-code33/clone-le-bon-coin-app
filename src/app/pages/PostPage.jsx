@@ -1,24 +1,15 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import PostService from "../../src/services/post.service";
 import ModalPhoto from "../components/ModalPhoto";
 
 const PostPage = () => {
     const { id } = useParams();
     const [post, setPost] = useState(null);
-
-    const fetchPost = async () => {
-        fetch(`http://localhost:8000/api/posts/${id}`)
-            .then((response) => response.json())
-            .then((data) => {
-                setPost(data)
-                console.log(data);
-            })
-            .catch((error) => {console.log(error)})
-    }
-
+    
     useEffect(() => {
-        fetchPost();
+        PostService.getById(id, setPost);
     }, [])
     return (
         <>

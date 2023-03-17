@@ -50,7 +50,7 @@ const ModalPhoto = ({files}) => {
             {
                 files.length > 1 && 
                 <>
-                    <Button variant="contained" onClick={handleOpen}>Voir les {files.length - 3} autres images</Button>
+                    <Button variant="contained" onClick={handleOpen}>Voir les {files.length} images</Button>
                     <Modal
                         open={open}
                         onClose={handleClose}

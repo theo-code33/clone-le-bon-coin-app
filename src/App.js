@@ -4,15 +4,9 @@ import PostPageForm from "./app/pages/PostPageForm";
 import Home from "./app/pages/Home";
 import { Container } from "@mui/material";
 import PostPage from "./app/pages/PostPage";
+import UpdatePostPage from "./app/pages/UpdatePostPage";
 
 function App() {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:8000/api/posts")
-      .then((response) => response.json())
-      .then((data) => setPosts(data));
-  }, []);
   return (
     <Container
       sx={{
@@ -21,9 +15,10 @@ function App() {
     >
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home posts={posts} />} />
+          <Route path="/" element={<Home/>} />
           <Route path="/post/:id" element={<PostPage />} />
           <Route path="/create-post" element={<PostPageForm />} />
+          <Route path="/update-post/:id" element={<UpdatePostPage />} />
         </Routes>
       </BrowserRouter>
     </Container>

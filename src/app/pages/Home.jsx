@@ -1,8 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import PostList from "../components/PostList";
+import SearchForm from "../components/SearchForm";
 
-const PostPage = ({ posts }) => {
+const PostPage = () => {
   const navigate = useNavigate();
   return (
     <Box>
@@ -17,6 +18,7 @@ const PostPage = ({ posts }) => {
       >
         Create new post
       </Button>
+      <SearchForm />
       <Typography
         variant="h2"
         sx={{
@@ -25,7 +27,7 @@ const PostPage = ({ posts }) => {
       >
         Liste des posts
       </Typography>
-      <PostList posts={posts} />
+      <PostList/>
     </Box>
   );
 };

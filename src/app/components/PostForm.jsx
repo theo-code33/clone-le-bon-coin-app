@@ -1,6 +1,8 @@
 import { Box, Button, Step, StepLabel, Stepper, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { PostContext } from "../../src/context/Post.context";
+import PostService from "../../src/services/post.service";
 import AutoCompleteInput from "./AutoCompleteInput";
 import Dropzone from "./DropZone";
 
@@ -13,10 +15,13 @@ const PostForm = () => {
     uploadFiles: []
   })
   const [error, setError] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const navigate = useNavigate();
-  const steps = ["Titre, contenu et localisation", "Images"]
   const [activeStep, setActiveStep] = useState(0);
+  
+  const navigate = useNavigate();
+  const {setPosts} = useContext(PostContext)
+  
+  const steps = ["Titre, contenu et localisation", "Images"]
+
   const isStepFailed = (step) => {
     return step === 1 && error;
   };
@@ -30,16 +35,11 @@ const PostForm = () => {
 
   const handleChange = (e) => {
     setError(false)
-    setSuccess(false)
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value
     })
   }
-
-  useEffect(() => {
-    console.log(credentials);
-  }, [credentials])
 
   const formStep = (step) => {
     switch (step) {
@@ -62,13 +62,13 @@ const PostForm = () => {
               onInput={handleChange}
               defaultValue={credentials.content}
             />
-            <AutoCompleteInput setCredentials={setCredentials} />
+            <AutoCompleteInput credentials={credentials} setCredentials={setCredentials} isPostForm={true}/>
           </>
         );
       case 1:
         return (
           <>
-            <Dropzone setCredentials={setCredentials} />
+            <Dropzone setCredentials={setCredentials} credentials={credentials}/>
           </>
         );
       default:
@@ -90,7 +90,7 @@ const PostForm = () => {
               onInput={handleChange}
               defaultValue={credentials.content}
             />
-            <AutoCompleteInput setCredentials={setCredentials} />
+            <AutoCompleteInput setCredentials={setCredentials} isPostForm={true}/>
           </>
         );
     }
@@ -110,26 +110,13 @@ const PostForm = () => {
       formData.append('administrative_area_level_1', credentials.location.administrative_area_level_1);
       formData.append('administrative_area_level_2', credentials.location.administrative_area_level_2);
       formData.append('lat', credentials.location.lat);
+      console.log("tm credentials :", credentials)
       formData.append('lng', credentials.location.lng);
       formData.append('address', credentials.location.address);
-      credentials.uploadFiles.forEach((file, index) => {
-        formData.append('files', credentials.uploadFiles[index]);
+      credentials.uploadFiles.forEach((file) => {
+        formData.append('files', file);
       })
-      
-      fetch('http://localhost:8000/api/posts', {
-        method: 'POST',
-        body: formData
-      })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-        setSuccess(true)
-        handleNext()
-      })
-      .catch((err) => {
-        setError(true)
-        console.log(err)
-      })
+      PostService.create(formData, setPosts, handleNext, setError)
     }else{
       setError(true)
     }
@@ -195,12 +182,6 @@ const PostForm = () => {
           </Box>
         </>
       )}
-
-      {/* <Button variant="contained" onClick={handleSubmit}>
-        Submit
-      </Button> */}
-      {/* {error && <span style={{color: "red"}}>Veuillez remplir tous les champs</span>}
-      {success && <span style={{color: "green"}}>Post créer avec succés</span>} */}
     </Box>
   );
 };

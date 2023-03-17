@@ -7,7 +7,7 @@ import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 
-function Dropzone({setCredentials}) {
+function Dropzone({credentials, setCredentials}) {
   const [imageURLs, setImageURLs] = useState(Array(7).fill(""));
   const [files, setFiles] = useState([]);
   const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
@@ -28,9 +28,10 @@ function Dropzone({setCredentials}) {
     setImageURLs(imageURLs.filter((url, i) => i !== index));
   };
   useEffect(() => {
-    setCredentials((newPost) => {
-        return {...newPost, uploadFiles: acceptedFiles}
+    acceptedFiles.map((file) => {
+        credentials.uploadFiles.push(file);
     })
+    setCredentials(credentials)
   }, [acceptedFiles]);
   useEffect(() => {
     const newImageURLs = [...imageURLs];

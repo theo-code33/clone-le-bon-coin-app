@@ -1,7 +1,10 @@
 import { Box } from "@mui/material";
+import { useContext } from "react";
+import { PostContext } from "../../src/context/Post.context";
 import PostCard from "./PostCard";
 
-const PostList = ({posts}) => {
+const PostList = () => {
+  const {posts} = useContext(PostContext);
   return (
     <Box sx={{
       display: "flex",
